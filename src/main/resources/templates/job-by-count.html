@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Job By Count</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <h3>Danh sách tất cả người</h3>
+
+    <div >
+        <table>
+            <thead>
+            <tr>
+                <th>job</th>
+                <th>count</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${mapJobByCount}">
+                <td th:text="${entry.key}">1</td>
+                <td th:text="${entry.value}">Tommy</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

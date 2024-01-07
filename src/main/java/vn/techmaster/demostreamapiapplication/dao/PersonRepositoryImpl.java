@@ -35,12 +35,12 @@ public class PersonRepositoryImpl implements PersonRepositoryInterface {
 
     @Override
     public List<String> getSortedJobs() {
-        return PersonDB.personList.stream().map(person -> person.getJob()).sorted().collect(Collectors.toList());
+        return PersonDB.personList.stream().map(person -> person.getJob()).distinct().sorted().collect(Collectors.toList());
     }
 
     @Override
     public List<String> getSortedCities() {
-        return PersonDB.personList.stream().map(person -> person.getCity()).sorted().collect(Collectors.toList());
+        return PersonDB.personList.stream().map(person -> person.getCity()).distinct().sorted().collect(Collectors.toList());
     }
 
     @Override

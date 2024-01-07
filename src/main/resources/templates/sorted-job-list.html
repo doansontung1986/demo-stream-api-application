@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Job List</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <h3>Danh sách tất cả nghề nghiệp đã được sắp xếp từ A-Z</h3>
+
+    <ul th:each="job : ${jobList}">
+        <li th:text="${job}">Doctor</li>
+    </ul>
+</body>
+</html>

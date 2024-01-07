@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,25 +16,26 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/person")
 public class PersonController {
 
     @Autowired
     private PersonService personService;
 
     @GetMapping("")
-    public void printListPeople() {
-        personService.printListPeople();
+    public String getHome() {
+        return "index";
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Person>> getAll() {
-        return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
+    public String getAll(Model model) {
+        model.addAttribute("personList", personService.getAll());
+        return "people-list";
     }
 
     @GetMapping("/sortPeopleByFullName")
-    public ResponseEntity<List<Person>> sortPeopleByFullName() {
-        return new ResponseEntity<>(personService.sortPeopleByFullName(), HttpStatus.OK);
+    public String sortPeopleByFullName(Model model) {
+        model.addAttribute("personList", personService.sortPeopleByFullName());
+        return "sorted-name-list";
     }
 
     @GetMapping("/sortPeopleByFullNameReversed")
@@ -42,13 +44,15 @@ public class PersonController {
     }
 
     @GetMapping("/getSortedJobs")
-    public ResponseEntity<List<String>> getSortedJobs() {
-        return new ResponseEntity<>(personService.getSortedJobs(), HttpStatus.OK);
+    public String getSortedJobs(Model model) {
+        model.addAttribute("jobList", personService.getSortedJobs());
+        return "sorted-job-list";
     }
 
     @GetMapping("/getSortedCities")
-    public ResponseEntity<List<String>> getSortedCities() {
-        return new ResponseEntity<>(personService.getSortedCities(), HttpStatus.OK);
+    public String getSortedCities(Model model) {
+        model.addAttribute("cities", personService.getSortedCities());
+        return "sorted-city-list";
     }
 
     @GetMapping("/femaleNames")
@@ -87,23 +91,29 @@ public class PersonController {
     }
 
     @GetMapping("/longestName")
-    public ResponseEntity<Person> longestName() {
-        return new ResponseEntity<>(personService.longestName(), HttpStatus.OK);
+    public String longestName(Model model) {
+        model.addAttribute("person", personService.longestName());
+        return "longest-name";
     }
 
     @GetMapping("/aboveAverageSalary")
-    public ResponseEntity<List<Person>> aboveAverageSalary() {
-        return new ResponseEntity<>(personService.aboveAverageSalary(), HttpStatus.OK);
+    public String aboveAverageSalary(Model model) {
+        model.addAttribute("personList", personService.aboveAverageSalary());
+        return "above-average-salary";
     }
 
     @GetMapping("/groupPeopleByCity")
-    public ResponseEntity<Map<String, List<Person>>> groupPeopleByCity() {
-        return new ResponseEntity<>(personService.groupPeopleByCity(), HttpStatus.OK);
+    public String groupPeopleByCity(Model model) {
+        Map<String, List<Person>> mapPeopleByCity = personService.groupPeopleByCity();
+        model.addAttribute("mapPeopleByCity", mapPeopleByCity);
+        return "group-people-by-city";
     }
 
     @GetMapping("/groupJobByCount")
-    public ResponseEntity<Map<String, Long>> groupJobByCount() {
-        return new ResponseEntity<>(personService.groupJobByCount(), HttpStatus.OK);
+    public String groupJobByCount(Model model) {
+        Map<String, Long> mapJobByCount = personService.groupJobByCount();
+        model.addAttribute("mapJobByCount", mapJobByCount);
+        return "job-by-count";
     }
 
     @GetMapping("/inSalaryRange")

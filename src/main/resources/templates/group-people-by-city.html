@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Group People By City</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <div th:each="entry : ${mapPeopleByCity}">
+        <h3 th:text="${entry.key}"></h3>
+
+        <table>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>fullname</th>
+                <th>job</th>
+                <th>gender</th>
+                <th>city</th>
+                <th>salary</th>
+                <th>birthday</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person : ${entry.value}">
+                <td th:text="${person.id}">1</td>
+                <td th:text="${person.fullName}">Tommy</td>
+                <td th:text="${person.job}">Musician</td>
+                <td th:text="${person.gender}">Male</td>
+                <td th:text="${person.city}">HCM City</td>
+                <td th:text="${person.salary}">1000</td>
+                <td th:text="${person.birthday}">1977/02/25</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
